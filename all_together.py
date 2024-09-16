@@ -13,15 +13,11 @@ from elevenlabs import play, stream
 
 client = ElevenLabs(api_key=os.getenv("ELEVENLABS_API_KEY"))
 
-# Set the Eleven API key
-# elevenlabs.set_api_key(os.getenv("ELEVENLABS_API_KEY"))
-
 translation_template = """
 Translate the following sentence into {language}, return ONLY the translation, nothing else.
 
 Sentence: {sentence}
 """
-
 
 aai.settings.api_key = os.getenv("ASSEMBLYAI_API_KEY")
 
@@ -62,10 +58,10 @@ def on_data(transcript: aai.RealtimeTranscript):
 
   if isinstance(transcript, aai.RealtimeFinalTranscript):
     print(transcript.text, end="\r\n")
-    # print("Translating...")
-    # translation = translate(str(transcript.text))
-    # print(f"Translation: {translation}")
-    # gen_dub(translation)
+    print("Translating...")
+    translation = translate(str(transcript.text))
+    print(f"Translation: {translation}")
+    # gen_dub(transcript.text)
   else:
     print(transcript.text, end="\r")
       
